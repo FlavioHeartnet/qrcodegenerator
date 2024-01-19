@@ -1,10 +1,11 @@
+import * as readlineSync from 'readline-sync';
 import axios from 'axios'
 import * as qr from 'qrcode';
 import * as fs from 'fs'
 import * as BlobUtil from 'blob-util';
 
 // Get URL and output file path from parsed arguments
-const urlToEncode = "https://www.bmw.de/de/index.html";
+const urlToEncode = readlineSync.question('Digite a URL que deseja tornar em QRCode: ')
 const outputPath = "qrcode.png";
 
 async function generateQRCode(url: string, outputPath: string): Promise<string> {
@@ -15,8 +16,8 @@ async function generateQRCode(url: string, outputPath: string): Promise<string> 
         dark: '#000000',
         light: '#ffffff'
       },
-      width: 300, // Set the width of the QR code
-      height: 300 // Set the height of the QR code
+      width: 600, // Set the width of the QR code
+      height: 600 // Set the height of the QR code
     };
 
     await qr.toFile(outputPath, url, qrCodeOptions);
